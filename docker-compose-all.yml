@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  mysql:
+    image: mariadb:latest
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: codeigniter_db
+      MYSQL_USER: codeigniter_user
+      MYSQL_PASSWORD: codeigniter_password
+    ports:
+      - "3306:3306"
+
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: example
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    volumes:
+      - ./uploads.ini:/usr/local/etc/php/conf.d/phpmyadmin-upload-limit.ini
+      
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php
+    restart: always
+    ports:
+      - "8000:80"
+    depends_on:
+      - mysql
+    volumes:
+      - .:/var/www/html
+      #- ./php.ini:/var/www/html/php.ini
+
