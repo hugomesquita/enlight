@@ -6,7 +6,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '66.228.50.249', //'mysql.l2sapollo.kinghost.net',
+	'hostname' => '200.98.136.138', //'mysql.l2sapollo.kinghost.net',
 	'username' => 'codeigniter_user', //'l2sapollo',
 	'password' => 'codeigniter_password', //'Eleonor18',
 	'database' => 'codeigniter_db', //'l2sapollo',
